@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Practice4
+namespace Задача_4_практика
 {
     class Program
     {
@@ -12,40 +12,38 @@ namespace Practice4
         {
             int osn = 2;
             int step = -200;
-            string s, tt;
-            int k, a, b, length;
-            s = "2";
-            tt = s;
-            k = 0;
-            a = (Convert.ToInt32(tt[0]) * osn + k);
-            Console.WriteLine(a);
-            //for (int i = -190; i > step; i--)
-            //{
-            //    tt = s;
-            //    length = tt.Length;
-            //    s = "";
-            //    k = 0;
-            //    for (int j = 0; j < length; j++)
-            //    {
-            //        a = (Convert.ToInt32(tt[j])) * osn + k;
-            //        b = a % 10;
-            //        k = a / 10;
-            //        s += Convert.ToString(b);
-            //        if (k != 0)
-            //        {
-            //            s += Convert.ToString(k);
-            //        }
-            //    }
-            //}
-            //char[] ch = s.ToCharArray();
-            //for (int i = 0; i < ch.Length / 2; i++)
-            //{
-            //    char tmp = ch[ch.Length - i - 1];
-            //    ch[ch.Length - i - 1] = ch[i];
-            //    ch[i] = tmp;
-            //}
-            //s = new string(ch);
-            ////Console.WriteLine(s);
+            string buf = "2";
+            string buf2 = "";
+            char c = ' ';
+            int k, a, b, len;
+            for (int i = -1; i > step; i--)
+            {
+                buf2 = buf;
+                len = buf2.Length;
+                buf = " ";
+                k = 0;
+                for (int j = 0; j < len; j++)
+                {
+                    a = (Convert.ToInt32(buf[j])) * osn + k;
+                    b = a % 10;
+                    k = a / 10;
+                    buf = buf + Convert.ToChar((int)b + 48);
+
+                }
+                if (k != 0)
+                    buf = buf + Convert.ToChar((int)k + 48);
+
+            }
+            len = buf.Length - 1;
+            for (int i = 0; i < (len / 2); i++)
+            {
+                c = buf[len - i];
+                buf.Replace(buf[len - i], buf[i]);
+                buf.Replace(buf[i], c);
+            }
+
+            Console.WriteLine((buf));
+            Console.WriteLine(Convert.ToChar((int)2+48));
         }
     }
 }
