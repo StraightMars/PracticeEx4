@@ -8,42 +8,50 @@ namespace Задача_4_практика
 {
     class Program
     {
+        static List<int> Multiplication(List<int> list)
+        {
+            int result;
+            int perenos = 0;
+            for (int i = 0; i < list.Count; i++)
+            {
+                result = list[i] * 5;
+                list[i] = (result + perenos) % 10;
+                perenos = (result + perenos) / 10;
+            }
+            if (perenos != 0)
+            {
+                list.Add(perenos);
+            }
+            return list;
+        }
+        public static string Reverse(string s)
+        {
+            char[] arr = s.ToCharArray();
+            Array.Reverse(arr);
+            return new string(arr);
+        }
         static void Main(string[] args)
         {
-            int osn = 2;
-            int step = -200;
-            string buf = "2";
-            string buf2 = "";
-            char c = ' ';
-            int k, a, b, len;
-            for (int i = -1; i > step; i--)
+            List<int> list = new List<int>();
+            list.Add(5);
+            int dot = 1;
+            string nuli = "", chisla = "";
+            string chislaReversed;
+            for (int i = 1; i < 200; i++)
             {
-                buf2 = buf;
-                len = buf2.Length;
-                buf = " ";
-                k = 0;
-                for (int j = 0; j < len; j++)
-                {
-                    a = (Convert.ToInt32(buf[j])) * osn + k;
-                    b = a % 10;
-                    k = a / 10;
-                    buf = buf + Convert.ToChar((int)b + 48);
-
-                }
-                if (k != 0)
-                    buf = buf + Convert.ToChar((int)k + 48);
-
+                Multiplication(list);
+                dot++;
             }
-            len = buf.Length - 1;
-            for (int i = 0; i < (len / 2); i++)
+            for(int i = 0; i < dot; i++)
             {
-                c = buf[len - i];
-                buf.Replace(buf[len - i], buf[i]);
-                buf.Replace(buf[i], c);
+                nuli += "0";
             }
-
-            Console.WriteLine((buf));
-            Console.WriteLine(Convert.ToChar((int)2+48));
+            for (int i = 0; i < list.Count; i++)
+            {
+                 chisla += list[i];
+            }
+            chislaReversed = Reverse(chisla);
+            Console.WriteLine("0." + nuli + chislaReversed);
         }
     }
 }
